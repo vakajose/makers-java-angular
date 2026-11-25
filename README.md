@@ -130,7 +130,7 @@ npm run build
 
 5. **Seguridad (Spring Security 6 + JWT Stateless + Control de Acceso):**
    - Usamos JWT statles, y evitamos el problema IDOR/BOLA tomando siempre el dato del userid del token y no asi de otra fuente como url o dato en body, asi seguramos que el usuario solo puede consultar su informacion y no de otro usuario.
-   Implementamos RBAC basico, usando controld de roles con hasAdmin evitando asi tambien que usuarios puedan acceder a recursos no permitidos.
+   Implementamos RBAC basico, usando controld de roles con @PreAuthorize("hasRole('ADMIN')") y @PreAuthorize("hasAnyRole('USER','ADMIN')") evitando asi tambien que usuarios puedan acceder a recursos no permitidos.
 
 6. **Transacciones, concurrencia y manejo de errores:**
    - Uso de @Transactional, Bloqueo Optimista (`@Version`) frente a bloqueos pesimistas porque en este caso no lo necesitamos, borrado lógico (`PENDING -> CANCELLED`) para trazabilidad financiera usando maquina de estados y estandarización de errores con ProblemDetail.
