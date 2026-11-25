@@ -1,0 +1,25 @@
+# PDFs and Windows metadata (never commit prompt PDFs)
+*.pdf
+*:Zone.Identifier
+
+# Java / Maven
+backend/target/
+backend/.mvn/timing.properties
+*.iml
+.idea/
+.classpath
+.project
+.settings/
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+
+# OS / Environment / Logs
+.DS_Store
+Thumbs.db
+.env
+.env.local
+*.log
