@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: loans-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: loansdb
+      POSTGRES_USER: loans_user
+      POSTGRES_PASSWORD: loans_pass
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U loans_user -d loansdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - loans_pgdata:/var/lib/postgresql/data
+
+volumes:
+  loans_pgdata:
