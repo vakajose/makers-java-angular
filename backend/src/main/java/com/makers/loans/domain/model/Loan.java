@@ -120,6 +120,10 @@ public class Loan {
         return candidateUserId != null && Objects.equals(this.userId, candidateUserId);
     }
 
+    public Loan copy() {
+        return new Loan(id, userId, userEmail, amount, termMonths, status, createdAt, updatedAt, version);
+    }
+
     private void ensurePending(String action) {
         if (this.status != LoanStatus.PENDING) {
             throw new InvalidLoanStateException(

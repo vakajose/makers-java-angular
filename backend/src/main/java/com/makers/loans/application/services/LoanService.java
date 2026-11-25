@@ -57,7 +57,7 @@ public class LoanService implements RequestLoanUseCase, GetLoansUseCase, ManageL
     @Override
     @Transactional
     public Loan approveLoan(Long loanId) {
-        Loan loan = findLoanOrThrow(loanId);
+        Loan loan = findLoanOrThrow(loanId).copy();
         loan.approve();
         return loanRepositoryPort.save(loan);
     }
@@ -65,7 +65,7 @@ public class LoanService implements RequestLoanUseCase, GetLoansUseCase, ManageL
     @Override
     @Transactional
     public Loan rejectLoan(Long loanId) {
-        Loan loan = findLoanOrThrow(loanId);
+        Loan loan = findLoanOrThrow(loanId).copy();
         loan.reject();
         return loanRepositoryPort.save(loan);
     }
@@ -73,7 +73,7 @@ public class LoanService implements RequestLoanUseCase, GetLoansUseCase, ManageL
     @Override
     @Transactional
     public Loan cancelLoan(Long loanId, Long requesterId, boolean isAdmin) {
-        Loan loan = findLoanOrThrow(loanId);
+        Loan loan = findLoanOrThrow(loanId).copy();
         verifyAccess(loan, requesterId, isAdmin, "No tienes permisos para cancelar este préstamo.");
         loan.cancel();
         return loanRepositoryPort.save(loan);
